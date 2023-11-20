@@ -1,23 +1,27 @@
 package com.example.testsBack.controllers;
 
-import com.example.testsBack.entities.Role;
+import com.example.testsBack.entities.StudentsGroup;
 import com.example.testsBack.exceptions.BadRequest;
-import com.example.testsBack.services.RoleService;
+import com.example.testsBack.repositories.TestRepository;
+import com.example.testsBack.services.StudentsGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/roles")
-public class RoleController {
-
+@RequestMapping("/sGroup")
+public class StudentsGroupController {
     @Autowired
-    private RoleService roleService;
+    private StudentsGroupService studentsGroupService;
+    @Autowired
+    private TestRepository testRepository;
 
     @PostMapping("/new")
-    public ResponseEntity addObject(@RequestBody Role role) {
+    public ResponseEntity addObject(@RequestBody StudentsGroup studentsGroup) {
         try {
-            return ResponseEntity.ok(roleService.addObject(role));
+            return ResponseEntity.ok(studentsGroupService.postObject(studentsGroup));
+
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -25,35 +29,34 @@ public class RoleController {
 
     @GetMapping("/")
     public ResponseEntity getAllObjects() {
-        return ResponseEntity.ok(roleService.getAllObjects());
+        return ResponseEntity.ok(studentsGroupService.getAllObjects());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity getOneObject(@PathVariable Long id) {
         try {
-            return ResponseEntity.ok(roleService.getOneObject(id));
+            return ResponseEntity.ok(studentsGroupService.getObject(id));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity editObject(@PathVariable Long id, @RequestBody Role role) {
+    public ResponseEntity putObject(@PathVariable Long id, @RequestBody StudentsGroup studentsGroup) {
         try {
-            return ResponseEntity.ok(roleService.editObject(role, id));
+            return ResponseEntity.ok(studentsGroupService.editObject(studentsGroup, id));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteObject(@PathVariable Long id) {
+    public  ResponseEntity deleteObject(@PathVariable Long id) {
         try {
-            roleService.deleteObject(id);
+            studentsGroupService.deleteObject(id);
             return ResponseEntity.ok("Object deleted");
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
 }
