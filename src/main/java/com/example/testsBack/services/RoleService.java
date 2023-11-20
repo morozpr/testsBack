@@ -5,6 +5,8 @@ import com.example.testsBack.repositories.RoleRepository;
 import org.springframework.stereotype.Service;
 import com.example.testsBack.entities.Role;
 
+import java.util.List;
+
 @Service
 public class RoleService {
     private final RoleRepository roleRepository;
@@ -13,7 +15,8 @@ public class RoleService {
     }
 
     public Role addObject(Role role) throws BadRequest {
-        if (roleRepository.findByRoleName(role.getRoleName()) != null) {
+        List<Role> check = roleRepository.findByRoleName(role.getRoleName());
+        if (check == null) {
             throw new BadRequest("Bad request");
         }
         return roleRepository.save(role);
