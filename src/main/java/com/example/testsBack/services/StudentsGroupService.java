@@ -15,7 +15,6 @@ public class StudentsGroupService {
         this.studentsGroupRepository = studentsGroupRepository;
     }
     public StudentsGroup postObject(StudentsGroup studentsGroup) throws BadRequest {
-
         if (studentsGroupRepository.existsByStudentsGroupName(studentsGroup.getStudentsGroupName()) == true) {
             throw new BadRequest("Already exists");
         }
