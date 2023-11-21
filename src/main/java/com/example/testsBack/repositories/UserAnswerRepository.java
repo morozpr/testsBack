@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserAnswerRepository extends CrudRepository<UserAnswer, Long>, JpaSpecificationExecutor<UserAnswer> {
+    boolean existsByUserAnswer(String userAnswer);
 }
