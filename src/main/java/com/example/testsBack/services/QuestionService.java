@@ -18,8 +18,7 @@ public class QuestionService {
     }
 
     public Question addObject(Question question) throws BadRequest {
-        List<Question> check = questionRepository.findByQuestionText(question.getQuestionText());
-        if (check != null) {
+        if (questionRepository.existsByQuestionText(question.getQuestionText()) == true) {
             throw new BadRequest("Object already exist");
         }
         return questionRepository.save(question);

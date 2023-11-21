@@ -16,8 +16,7 @@ public class DisciplineService {
     }
 
     public Discipline addObject(Discipline discipline) throws BadRequest {
-        List<Discipline> check = disciplineRepository.findByDisciplineName(discipline.getDisciplineName());
-        if (check == null) {
+        if (disciplineRepository.existsByDisciplineName(discipline.getDisciplineName()) == true) {
             throw new BadRequest("Object already exist");
         }
         return disciplineRepository.save(discipline);

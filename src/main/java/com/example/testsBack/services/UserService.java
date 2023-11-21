@@ -15,8 +15,7 @@ public class UserService {
     }
 
     public User addObject(User user) throws BadRequest {
-        List<User> check = userRepository.findByEmail(user.getEmail());
-        if (check != null) {
+        if (userRepository.existsByEmail(user.getEmail()) == true) {
             throw new BadRequest("Object already exist");
         }
         return userRepository.save(user);

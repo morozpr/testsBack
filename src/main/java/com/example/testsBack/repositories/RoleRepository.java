@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public interface RoleRepository extends CrudRepository<Role, Long>, JpaSpecificationExecutor<Role> {
+    boolean existsByRoleName(String roleName);
     @Transactional
     @Modifying
     @Query("update Role r set r.roleName = ?1 where r.id = ?2")

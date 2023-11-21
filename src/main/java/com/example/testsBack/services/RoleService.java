@@ -15,8 +15,7 @@ public class RoleService {
     }
 
     public Role addObject(Role role) throws BadRequest {
-        List<Role> check = roleRepository.findByRoleName(role.getRoleName());
-        if (check == null) {
+        if (roleRepository.existsByRoleName(role.getRoleName()) == true) {
             throw new BadRequest("Bad request");
         }
 
