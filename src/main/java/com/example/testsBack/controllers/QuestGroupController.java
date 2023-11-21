@@ -1,23 +1,23 @@
 package com.example.testsBack.controllers;
 
-import com.example.testsBack.entities.Answer;
+import com.example.testsBack.entities.QuestGroup;
 import com.example.testsBack.exceptions.BadRequest;
-import com.example.testsBack.services.AnswerService;
+import com.example.testsBack.services.QuestGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/answers")
-public class AnswerController {
+@RequestMapping("/QuestGroups")
+public class QuestGroupController {
     @Autowired
-    private AnswerService answerService;
+    private QuestGroupService questGroupService;
 
 
     @PostMapping("/new")
-    public ResponseEntity postObject(@RequestBody Answer answer) {
+    public ResponseEntity postObject(@RequestBody QuestGroup questGroup) {
         try {
-            return ResponseEntity.ok(answerService.addObject(answer));
+            return ResponseEntity.ok(questGroupService.postObject(questGroup));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -25,33 +25,35 @@ public class AnswerController {
 
     @GetMapping("/")
     public ResponseEntity getAllObjects() {
-        return ResponseEntity.ok(answerService.getAllObjects());
+        return ResponseEntity.ok(questGroupService.getAllObjects());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getOneObject(@PathVariable Long id) {
+    public  ResponseEntity getObject(@PathVariable Long id) {
         try {
-            return ResponseEntity.ok(answerService.getOneObject(id));
+            return ResponseEntity.ok(questGroupService.getObject(id));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
     @PutMapping("/{id}")
-    public ResponseEntity putObject(@PathVariable Long id, @PathVariable Answer answer) {
-        try {
-            return  ResponseEntity.ok(answerService.editObject(id, answer));
-        } catch (BadRequest e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity putObject(@PathVariable Long id, @PathVariable QuestGroup questGroup) {
+       try {
+           return ResponseEntity.ok(questGroupService.editObject(questGroup, id));
+       } catch (BadRequest e) {
+           return ResponseEntity.badRequest().body(e.getMessage());
+       }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteObject(@PathVariable Long id) {
         try {
-            answerService.deleteObject(id);
+            questGroupService.deleteObject(id);
             return ResponseEntity.ok("Object deleted");
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
 }
