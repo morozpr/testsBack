@@ -24,7 +24,7 @@ public class AnswerService {
         return answerRepository.save(answer);
     }
 
-    public Answer getObject(Long id) throws BadRequest {
+    public Answer getOneObject(Long id) throws BadRequest {
         if (answerRepository.findById(id) == null) {
             throw new BadRequest("Object not found");
         }
