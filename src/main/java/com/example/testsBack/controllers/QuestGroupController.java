@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/QuestGroups")
+@RequestMapping("/questGroups")
 public class QuestGroupController {
     @Autowired
     private QuestGroupService questGroupService;
