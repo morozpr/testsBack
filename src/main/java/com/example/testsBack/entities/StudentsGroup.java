@@ -7,7 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "\"StudentsGroup\"")
+@Table(name = "\"studentsGroup\"")
 public class StudentsGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

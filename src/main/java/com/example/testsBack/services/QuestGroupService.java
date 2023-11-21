@@ -3,7 +3,6 @@ package com.example.testsBack.services;
 import com.example.testsBack.entities.QuestGroup;
 import com.example.testsBack.exceptions.BadRequest;
 import com.example.testsBack.repositories.QuestGroupRepository;
-import com.example.testsBack.repositories.UniversityRepository;
 import org.springframework.stereotype.Service;
 
 @Service
