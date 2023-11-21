@@ -40,6 +40,7 @@ public class QuestionService {
         if (questionRepository.findById(id) == null) {
             throw new BadRequest("Object not found");
         }
+        question.setId(id);
         return questionRepository.save(question);
     }
 

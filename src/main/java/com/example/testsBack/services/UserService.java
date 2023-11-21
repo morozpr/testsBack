@@ -35,6 +35,7 @@ public class UserService {
         if (userRepository.findById(id) == null) {
             throw new BadRequest("Object not found");
         }
+        user.setId(id);
         return userRepository.save(user);
     }
 
