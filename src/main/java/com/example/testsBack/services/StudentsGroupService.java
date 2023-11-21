@@ -15,9 +15,9 @@ public class StudentsGroupService {
         this.studentsGroupRepository = studentsGroupRepository;
     }
     public StudentsGroup postObject(StudentsGroup studentsGroup) throws BadRequest {
-        List<StudentsGroup> check = studentsGroupRepository.findByStudentsGroupName(studentsGroup.getStudentsGroupName());
-        if (check == null) {
-            throw new BadRequest("Bad Request.");
+
+        if (studentsGroupRepository.existsByStudentsGroupName(studentsGroup.getStudentsGroupName()) == true) {
+            throw new BadRequest("Already exists");
         }
         return studentsGroupRepository.save(studentsGroup); /*  С большой буквы это тип данных, а с маленькой переменная */
     }

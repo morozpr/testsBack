@@ -15,4 +15,6 @@ public interface StudentsGroupRepository extends CrudRepository<StudentsGroup, L
     @Query("update StudentsGroup s set s.studentsGroupName = ?1 where s.id = ?2")
     void updateStudentsGroupNameById(String studentsGroupName, Long id);
     List<StudentsGroup> findByStudentsGroupName(String studentsGroupName);
+    boolean existsByStudentsGroupName(String studentsGroupName);
+
 }
