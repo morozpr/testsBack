@@ -38,7 +38,7 @@ public class QuestGroupController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity putObject(@PathVariable Long id, @PathVariable QuestGroup questGroup) {
+    public ResponseEntity putObject(@PathVariable Long id, @RequestBody QuestGroup questGroup) {
        try {
            return ResponseEntity.ok(questGroupService.editObject(questGroup, id));
        } catch (BadRequest e) {
