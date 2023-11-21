@@ -17,7 +17,10 @@ public class AnswerService {
         this.answerRepository = answerRepository;
     }
 
-    public Answer addObject(Answer answer) {
+    public Answer addObject(Answer answer) throws BadRequest {
+        if (answer == null) {
+            throw new BadRequest("Bad Request");
+        }
         return answerRepository.save(answer);
     }
 
