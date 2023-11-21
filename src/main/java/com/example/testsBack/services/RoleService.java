@@ -19,6 +19,7 @@ public class RoleService {
         if (check == null) {
             throw new BadRequest("Bad request");
         }
+
         return roleRepository.save(role);
     }
 

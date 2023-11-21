@@ -2,7 +2,6 @@ package com.example.testsBack.controllers;
 
 import com.example.testsBack.entities.StudentsGroup;
 import com.example.testsBack.exceptions.BadRequest;
-import com.example.testsBack.repositories.TestRepository;
 import com.example.testsBack.services.StudentsGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.*;
 public class StudentsGroupController {
     @Autowired
     private StudentsGroupService studentsGroupService;
-    @Autowired
-    private TestRepository testRepository;
 
     @PostMapping("/new")
     public ResponseEntity addObject(@RequestBody StudentsGroup studentsGroup) {
