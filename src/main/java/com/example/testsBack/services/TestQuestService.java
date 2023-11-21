@@ -35,7 +35,7 @@ public class TestQuestService {
         if (testQuestRepository.findById(id) == null) {
             throw new BadRequest("Object not found");
         }
-        testQuest.setTestID(id);
+        testQuest.setId(id);
         return testQuestRepository.save(testQuest);
     }
 
