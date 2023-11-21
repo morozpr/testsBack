@@ -13,7 +13,7 @@ public class TestQuestService {
         this.testQuestRepository = testQuestRepository;
     }
 
-    public TestQuest putObject(TestQuest testQuest) throws BadRequest {
+    public TestQuest postObject(TestQuest testQuest) throws BadRequest {
         if (testQuest == null) {
             throw new BadRequest("Bad request");
         }

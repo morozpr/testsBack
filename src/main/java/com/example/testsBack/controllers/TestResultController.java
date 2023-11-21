@@ -1,22 +1,22 @@
 package com.example.testsBack.controllers;
 
-import com.example.testsBack.entities.Question;
+import com.example.testsBack.entities.TestResult;
 import com.example.testsBack.exceptions.BadRequest;
-import com.example.testsBack.services.QuestionService;
+import com.example.testsBack.services.TestResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/questions")
-public class QuestionController {
+@RequestMapping("/testResults")
+public class TestResultController {
     @Autowired
-    private QuestionService questionService;
+    private TestResultService testResultService;
 
     @PostMapping("/new")
-    public ResponseEntity postObject(@RequestBody Question question) {
+    public ResponseEntity postObject(@RequestBody TestResult testResult) {
         try {
-            return ResponseEntity.ok(questionService.addObject(question));
+            return ResponseEntity.ok(testResultService.addObject(testResult));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -25,19 +25,19 @@ public class QuestionController {
     @GetMapping("/{id}")
     public ResponseEntity getOneObject(@PathVariable Long id) {
         try {
-            return ResponseEntity.ok(questionService.getObject(id));
+            return ResponseEntity.ok(testResultService.getOneObject(id));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @GetMapping("/")
-    public ResponseEntity getAllObjects() { return ResponseEntity.ok(questionService.getAllObjects()); }
+    public ResponseEntity getAllObjects() { return ResponseEntity.ok(testResultService.getAllObjects()); }
 
     @PutMapping("/{id}")
-    public ResponseEntity putObject(@PathVariable Long id, @RequestBody Question question) {
+    public ResponseEntity putObject(@PathVariable Long id, @RequestBody TestResult testResult) {
         try {
-            return ResponseEntity.ok(questionService.editObject(id, question));
+            return ResponseEntity.ok(testResultService.editObject(id, testResult));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -46,7 +46,7 @@ public class QuestionController {
     @DeleteMapping("/{id}")
     public ResponseEntity deleteObject(@PathVariable Long id) {
         try {
-            questionService.deleteObject(id);
+            testResultService.deleteObject(id);
             return ResponseEntity.ok("Object deleted");
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
