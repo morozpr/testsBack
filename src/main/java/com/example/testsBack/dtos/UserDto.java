@@ -26,5 +26,4 @@ public class UserDto implements Serializable {
     @NotNull
     RoleDto roleID;
     StudentsGroupDto studentsGroupID;
-
 }

@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity putObject(@RequestBody UserDto userDto) {
+    public ResponseEntity postObject(@RequestBody UserDto userDto) {
         try {
             User user = userMapper.toEntity(userDto);
             return ResponseEntity.ok(userService.addObject(user));
