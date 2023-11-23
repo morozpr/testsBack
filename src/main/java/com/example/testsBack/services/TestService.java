@@ -1,9 +1,13 @@
 package com.example.testsBack.services;
 
 import com.example.testsBack.entities.Test;
+import com.example.testsBack.entities.User;
 import com.example.testsBack.exceptions.BadRequest;
 import com.example.testsBack.repositories.TestRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TestService {
@@ -25,8 +29,10 @@ public class TestService {
         } return testRepository.findById(id).get();
     }
 
-    public Iterable<Test> getAllObject() {
-        return testRepository.findAll();
+    public List getAllObject() {
+        List<Test> objectsList = new ArrayList();
+        testRepository.findAll().iterator().forEachRemaining(objectsList::add);
+        return objectsList;
     }
 
     public Test editObject(Test test, Long id) throws BadRequest {
