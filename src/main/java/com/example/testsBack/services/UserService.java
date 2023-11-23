@@ -4,7 +4,6 @@ import com.example.testsBack.entities.User;
 import com.example.testsBack.exceptions.BadRequest;
 import com.example.testsBack.repositories.RoleRepository;
 import com.example.testsBack.repositories.UserRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
-import java.util.Set;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,10 +40,15 @@ public class UserService implements UserDetailsService {
         if (userRepository.findById(id).isEmpty()) {
             throw new BadRequest("Object not found");
         }
+
         return userRepository.findById(id).get();
     }
 
-    public Iterable<User> getAllObjects() { return userRepository.findAll(); }
+    public List<User> getAllObjects() {
+        List<User> objectsList = new ArrayList();
+        userRepository.findAll().iterator().forEachRemaining(objectsList::add);
+        return objectsList;
+    }
 
     public User editObject(User user, Long id) throws BadRequest {
         if (userRepository.findById(id).isEmpty()) {

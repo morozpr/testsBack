@@ -1,43 +1,50 @@
 package com.example.testsBack.controllers;
 
 import com.example.testsBack.entities.TestResultUserAnswer;
+import com.example.testsBack.entities.University;
 import com.example.testsBack.exceptions.BadRequest;
+import com.example.testsBack.mappers.UniversityMapper;
 import com.example.testsBack.services.TestResultUserAnswerService;
+import com.example.testsBack.services.UniversityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.stream.Collectors;
+
 @RestController
-@RequestMapping("/testResultUserAnswers")
-public class TestResultUserAnswerController {
+@RequestMapping("/universities")
+public class UniversityController {
     @Autowired
-    private TestResultUserAnswerService testResultUserAnswerService;
+    private UniversityService universityService;
+    @Autowired
+    private UniversityMapper universityMapper;
 
     @PostMapping("/new")
-    public ResponseEntity postObject(@RequestBody TestResultUserAnswer testResultUserAnswer) {
+    public ResponseEntity postObject(@RequestBody University university) {
         try {
-            return ResponseEntity.ok(testResultUserAnswerService.postObject(testResultUserAnswer));
+            return ResponseEntity.ok(universityService.postObject(university));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @GetMapping("/")
-    public ResponseEntity getAllObjects() { return ResponseEntity.ok(testResultUserAnswerService.getAllObjects()); }
+    public ResponseEntity getAllObjects() { return ResponseEntity.ok(universityService.getAllObject().stream().map(universityMapper::toDto).collect(Collectors.toList())); }
 
     @GetMapping("/{id}")
     public ResponseEntity getOneObject(@PathVariable Long id) {
         try {
-            return ResponseEntity.ok(testResultUserAnswerService.getOneObject(id));
+            return ResponseEntity.ok(universityService.getObject(id));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity putObject(@PathVariable Long id,@RequestBody TestResultUserAnswer testResultUserAnswer) {
+    public ResponseEntity putObject(@PathVariable Long id,@RequestBody University university) {
         try {
-            return ResponseEntity.ok(testResultUserAnswerService.editObject(id, testResultUserAnswer));
+            return ResponseEntity.ok(universityService.editObject(university, id));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -46,7 +53,7 @@ public class TestResultUserAnswerController {
     @DeleteMapping("/{id}")
     public ResponseEntity deleteObject(@PathVariable Long id) {
         try {
-            testResultUserAnswerService.deleteObject(id);
+            universityService.deleteObject(id);
             return ResponseEntity.ok("Object deleted");
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());

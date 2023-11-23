@@ -3,6 +3,7 @@ package com.example.testsBack.configs;
 import com.example.testsBack.services.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -30,14 +31,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/users").hasAnyRole("ADMIN", "SADMIN", "USER")
+                        .requestMatchers("/users/**").hasAnyRole("ADMIN", "SADMIN", "USER")
+                        .requestMatchers(HttpMethod.POST).hasAnyRole("ADMIN", "SADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
                         .permitAll()
                 )
-                .logout(LogoutConfigurer::permitAll);
+                .logout(LogoutConfigurer::permitAll)
+                .authenticationProvider(daoAuthenticationProvider());
         return httpSecurity.build();
     }
 
@@ -47,7 +50,6 @@ public class SecurityConfig {
                 .authenticationProvider(daoAuthenticationProvider()).
                 build();
     }
-//
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
