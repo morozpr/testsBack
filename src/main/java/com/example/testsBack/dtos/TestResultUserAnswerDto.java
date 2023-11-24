@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Value;
 
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * DTO for {@link com.example.testsBack.entities.TestResultUserAnswer}
@@ -14,4 +15,5 @@ public class TestResultUserAnswerDto implements Serializable {
     UserAnswerDto userAnswerID;
     @NotNull
     TestResultDto testResultID;
+    Set<TestResultDto> testResults;
 }

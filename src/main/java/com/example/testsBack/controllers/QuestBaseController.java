@@ -4,9 +4,7 @@ import com.example.testsBack.dtos.QuestBaseDto;
 import com.example.testsBack.entities.QuestBase;
 import com.example.testsBack.exceptions.BadRequest;
 import com.example.testsBack.mappers.QuestBaseMapper;
-import com.example.testsBack.mappers.QuestGroupMapper;
 import com.example.testsBack.services.QuestBaseService;
-import com.example.testsBack.services.QuestGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +16,6 @@ import java.util.stream.Collectors;
 public class QuestBaseController {
     @Autowired
     private QuestBaseService questBaseService;
-
     @Autowired
     private QuestBaseMapper questBaseMapper;
 
