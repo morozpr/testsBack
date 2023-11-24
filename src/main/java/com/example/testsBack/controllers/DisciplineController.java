@@ -23,7 +23,7 @@ public class DisciplineController {
     @PostMapping("/new")
     public ResponseEntity postObject(@RequestBody DisciplineDto discipline) {
         try {
-            return ResponseEntity.ok(disciplineService.addObject(disciplineMapper.toEntity(discipline)));
+            return ResponseEntity.ok(disciplineMapper.toDto(disciplineService.addObject(disciplineMapper.toEntity(discipline))));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -46,7 +46,7 @@ public class DisciplineController {
     @PutMapping("/{id}")
     public ResponseEntity putObject(@PathVariable Long id, @RequestBody DisciplineDto discipline) {
         try {
-            return ResponseEntity.ok(disciplineService.editObject(id, disciplineMapper.toEntity(discipline)));
+            return ResponseEntity.ok(disciplineMapper.toDto(disciplineService.editObject(id, disciplineMapper.toEntity(discipline))));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
