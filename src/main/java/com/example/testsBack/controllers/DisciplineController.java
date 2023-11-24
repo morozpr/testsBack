@@ -1,11 +1,15 @@
 package com.example.testsBack.controllers;
 
+import com.example.testsBack.dtos.DisciplineDto;
 import com.example.testsBack.entities.Discipline;
 import com.example.testsBack.exceptions.BadRequest;
+import com.example.testsBack.mappers.DisciplineMapper;
 import com.example.testsBack.services.DisciplineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/disciplines")
@@ -13,11 +17,13 @@ public class DisciplineController {
 
     @Autowired
     private DisciplineService disciplineService;
+    @Autowired
+    private DisciplineMapper disciplineMapper;
 
     @PostMapping("/new")
-    public ResponseEntity postObject(@RequestBody Discipline discipline) {
+    public ResponseEntity postObject(@RequestBody DisciplineDto discipline) {
         try {
-            return ResponseEntity.ok(disciplineService.addObject(discipline));
+            return ResponseEntity.ok(disciplineService.addObject(disciplineMapper.toEntity(discipline)));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -25,22 +31,22 @@ public class DisciplineController {
 
     @GetMapping("/")
     public ResponseEntity getAllObjects() {
-        return ResponseEntity.ok(disciplineService.getAllObjects());
+        return ResponseEntity.ok(disciplineService.getAllObjects().stream().map(disciplineMapper::toDto).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity getOneObject(@PathVariable Long id) {
         try {
-            return ResponseEntity.ok(disciplineService.getOneObject(id));
+            return ResponseEntity.ok(disciplineMapper.toDto(disciplineService.getOneObject(id)));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity putObject(@PathVariable Long id, @RequestBody Discipline discipline) {
+    public ResponseEntity putObject(@PathVariable Long id, @RequestBody DisciplineDto discipline) {
         try {
-            return ResponseEntity.ok(disciplineService.editObject(id, discipline));
+            return ResponseEntity.ok(disciplineService.editObject(id, disciplineMapper.toEntity(discipline)));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

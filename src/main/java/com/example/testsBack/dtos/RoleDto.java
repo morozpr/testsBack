@@ -12,7 +12,6 @@ import java.io.Serializable;
 @Value
 @AllArgsConstructor
 public class RoleDto implements Serializable {
-    Long id;
     @NotNull
     String roleName;
 }

@@ -29,7 +29,7 @@ public class TestService {
         } return testRepository.findById(id).get();
     }
 
-    public List getAllObject() {
+    public List<Test> getAllObject() {
         List<Test> objectsList = new ArrayList();
         testRepository.findAll().iterator().forEachRemaining(objectsList::add);
         return objectsList;

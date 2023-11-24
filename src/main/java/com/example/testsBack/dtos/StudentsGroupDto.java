@@ -12,7 +12,6 @@ import java.io.Serializable;
 @Value
 @AllArgsConstructor
 public class StudentsGroupDto implements Serializable {
-    Long id;
     @NotNull
     String studentsGroupName;
 }

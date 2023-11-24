@@ -12,8 +12,6 @@ import java.io.Serializable;
 @Value
 @AllArgsConstructor
 public class UniversityDto implements Serializable {
-    Long id;
     @NotNull
     String universityName;
-
 }

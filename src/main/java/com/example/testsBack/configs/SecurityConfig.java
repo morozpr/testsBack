@@ -32,7 +32,6 @@ public class SecurityConfig {
         httpSecurity
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/users/**").hasAnyRole("ADMIN", "SADMIN", "USER")
-                        .requestMatchers(HttpMethod.POST).hasAnyRole("ADMIN", "SADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

@@ -13,15 +13,11 @@ import java.io.Serializable;
 @Value
 @AllArgsConstructor
 public class UserDto implements Serializable {
-    Long id;
     @NotNull
     String fullName;
     String email;
-    String password;
-    String passwordSalt;
     UniversityDto universityID;
     String telegramLogin;
-    String telegramID;
     String phoneNumber;
     @NotNull
     RoleDto roleID;

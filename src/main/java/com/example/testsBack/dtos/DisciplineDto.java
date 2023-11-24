@@ -10,7 +10,6 @@ import java.io.Serializable;
  */
 @Value
 public class DisciplineDto implements Serializable {
-    Long id;
     @NotNull
     String disciplineName;
 }

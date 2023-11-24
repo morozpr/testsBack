@@ -4,7 +4,6 @@ import com.example.testsBack.entities.Test;
 import com.example.testsBack.exceptions.BadRequest;
 import com.example.testsBack.mappers.TestMapper;
 import com.example.testsBack.services.TestService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +12,11 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/test")
 public class TestController {
-    @Autowired
-    private TestService testService;
+    private final TestService testService;
     private final TestMapper testMapper;
 
-    public TestController(TestMapper testMapper) {
+    public TestController(TestService testService, TestMapper testMapper) {
+        this.testService = testService;
         this.testMapper = testMapper;
     }
 
@@ -32,7 +31,7 @@ public class TestController {
 
     @GetMapping("/")
     public ResponseEntity getAllObject() {
-        return ResponseEntity.ok(testService.getAllObject().stream().map(testMapper::toDto).collect(Collectors.toList()));
+        return ResponseEntity.ok(testService.getAllObject().stream().map(testMapper::toDto).collect(Collectors.toSet()));
     }
 
     @GetMapping("/{id}")
