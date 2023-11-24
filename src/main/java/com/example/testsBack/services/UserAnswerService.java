@@ -6,6 +6,9 @@ import com.example.testsBack.repositories.UniversityRepository;
 import com.example.testsBack.repositories.UserAnswerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserAnswerService {
 
@@ -29,8 +32,10 @@ public class UserAnswerService {
         return userAnswerRepository.findById(id).get();
     }
 
-    public Iterable<UserAnswer> getAllObjects() {
-        return userAnswerRepository.findAll();
+    public List<UserAnswer> getAllObjects() {
+        List<UserAnswer> objectsList = new ArrayList();
+        userAnswerRepository.findAll().iterator().forEachRemaining(objectsList::add);
+        return objectsList;
     }
 
     public UserAnswer editObject(UserAnswer userAnswer, Long id) throws BadRequest {

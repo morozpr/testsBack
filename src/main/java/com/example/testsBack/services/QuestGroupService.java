@@ -5,6 +5,9 @@ import com.example.testsBack.exceptions.BadRequest;
 import com.example.testsBack.repositories.QuestGroupRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class QuestGroupService {
 
@@ -26,8 +29,10 @@ public class QuestGroupService {
         } return questGroupRepository.findById(id).get();
     }
 
-    public Iterable<QuestGroup> getAllObjects() {
-        return questGroupRepository.findAll();
+    public List<QuestGroup> getAllObjects() {
+        List<QuestGroup> objectsList = new ArrayList();
+        questGroupRepository.findAll().iterator().forEachRemaining(objectsList::add);
+        return objectsList;
     }
 
     public QuestGroup editObject(QuestGroup questGroup, Long id) throws BadRequest {
