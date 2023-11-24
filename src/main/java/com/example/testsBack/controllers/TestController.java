@@ -5,7 +5,6 @@ import com.example.testsBack.entities.Test;
 import com.example.testsBack.exceptions.BadRequest;
 import com.example.testsBack.mappers.TestMapper;
 import com.example.testsBack.services.TestService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
