@@ -1,6 +1,7 @@
 package com.example.testsBack.configs;
 
 import com.example.testsBack.services.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
@@ -12,43 +13,20 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @EnableWebSecurity
-@EnableMethodSecurity(securedEnabled = true)
+@RequiredArgsConstructor
+@EnableMethodSecurity (securedEnabled = true)
 public class SecurityConfig {
     private final UserService userService;
 
-    public SecurityConfig(UserService userService) {
-        this.userService = userService;
-    }
-
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/users/**").hasAnyRole("ADMIN", "SADMIN", "USER")
-                        .anyRequest().authenticated()
-                )
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .permitAll()
-                )
-                .logout(LogoutConfigurer::permitAll)
-                .authenticationProvider(daoAuthenticationProvider());
-        return httpSecurity.build();
-    }
-
-    @Bean
-    public ProviderManager authManagerBean(HttpSecurity security) throws Exception {
-        return (ProviderManager) security.getSharedObject(AuthenticationManagerBuilder.class)
-                .authenticationProvider(daoAuthenticationProvider()).
-                build();
-    }
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
@@ -57,6 +35,31 @@ public class SecurityConfig {
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
 
         return daoAuthenticationProvider;
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable());
+        http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
+
+        http
+                .authorizeHttpRequests(requests -> requests
+//                        .requestMatchers(HttpMethod.POST, "users/**").hasAnyRole("ADMIN", "SADMIN")
+//                        .anyRequest().hasAnyRole("ADMIN", "SADMIN")
+                        .anyRequest().authenticated()
+                )
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .permitAll()
+                )
+                .logout(logout -> logout.permitAll());
+        return http.build();
+    }
+    @Bean
+    public ProviderManager authManagerBean(HttpSecurity security) throws Exception {
+        return (ProviderManager) security.getSharedObject(AuthenticationManagerBuilder.class)
+                .authenticationProvider(daoAuthenticationProvider()).
+                build();
     }
 
     @Bean
@@ -71,7 +74,14 @@ public class SecurityConfig {
     }
 
     @Bean
-    protected void configure(AuthenticationManagerBuilder auth) {
-        auth.authenticationProvider(daoAuthenticationProvider());
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }

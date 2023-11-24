@@ -1,5 +1,6 @@
 package com.example.testsBack;
 
+import com.example.testsBack.configs.SecurityConfig;
 import org.mapstruct.Mapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
