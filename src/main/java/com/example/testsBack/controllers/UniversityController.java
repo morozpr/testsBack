@@ -1,5 +1,6 @@
 package com.example.testsBack.controllers;
 
+import com.example.testsBack.dtos.UniversityDto;
 import com.example.testsBack.entities.TestResultUserAnswer;
 import com.example.testsBack.entities.University;
 import com.example.testsBack.exceptions.BadRequest;
@@ -23,7 +24,7 @@ public class UniversityController {
     @PostMapping("/new")
     public ResponseEntity postObject(@RequestBody University university) {
         try {
-            return ResponseEntity.ok(universityService.postObject(university));
+            return ResponseEntity.ok(universityMapper.toDto(universityService.postObject(university)));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -35,16 +36,16 @@ public class UniversityController {
     @GetMapping("/{id}")
     public ResponseEntity getOneObject(@PathVariable Long id) {
         try {
-            return ResponseEntity.ok(universityService.getObject(id));
+            return ResponseEntity.ok(universityMapper.toDto(universityService.getObject(id)));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity putObject(@PathVariable Long id,@RequestBody University university) {
+    public ResponseEntity putObject(@PathVariable Long id,@RequestBody UniversityDto university) {
         try {
-            return ResponseEntity.ok(universityService.editObject(university, id));
+            return ResponseEntity.ok(universityMapper.toDto(universityService.editObject(universityMapper.toEntity(university), id)));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

@@ -1,7 +1,9 @@
 package com.example.testsBack.controllers;
 
+import com.example.testsBack.dtos.QuestGroupDto;
 import com.example.testsBack.entities.QuestGroup;
 import com.example.testsBack.exceptions.BadRequest;
+import com.example.testsBack.mappers.QuestGroupMapper;
 import com.example.testsBack.services.QuestGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +14,14 @@ import org.springframework.web.bind.annotation.*;
 public class QuestGroupController {
     @Autowired
     private QuestGroupService questGroupService;
+    @Autowired
+    private QuestGroupMapper questGroupMapper;
 
 
     @PostMapping("/new")
     public ResponseEntity postObject(@RequestBody QuestGroup questGroup) {
         try {
-            return ResponseEntity.ok(questGroupService.postObject(questGroup));
+            return ResponseEntity.ok(questGroupMapper.toDto(questGroupService.postObject(questGroup)));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -31,16 +35,16 @@ public class QuestGroupController {
     @GetMapping("/{id}")
     public  ResponseEntity getObject(@PathVariable Long id) {
         try {
-            return ResponseEntity.ok(questGroupService.getObject(id));
+            return ResponseEntity.ok(questGroupMapper.toDto(questGroupService.getObject(id)));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity putObject(@PathVariable Long id, @RequestBody QuestGroup questGroup) {
+    public ResponseEntity putObject(@PathVariable Long id, @RequestBody QuestGroupDto questGroup) {
        try {
-           return ResponseEntity.ok(questGroupService.editObject(questGroup, id));
+           return ResponseEntity.ok(questGroupMapper.toDto(questGroupService.editObject(questGroupMapper.toEntity(questGroup), id)));
        } catch (BadRequest e) {
            return ResponseEntity.badRequest().body(e.getMessage());
        }

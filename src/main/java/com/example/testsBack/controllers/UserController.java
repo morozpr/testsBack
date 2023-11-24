@@ -22,10 +22,9 @@ public class UserController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity putObject(@RequestBody UserDto userDto) {
+    public ResponseEntity putObject(@RequestBody User user) {
         try {
-            User user = userMapper.toEntity(userDto);
-            return ResponseEntity.ok(userService.addObject(user));
+            return ResponseEntity.ok(userMapper.toDto(userService.addObject(user)));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -33,26 +32,22 @@ public class UserController {
 
     @GetMapping("/")
     public ResponseEntity getAllObjects() {
-
         return ResponseEntity.ok(userService.getAllObjects().stream().map(userMapper::toDto).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity getOneObject(@PathVariable Long id) {
         try {
-            User user = userService.getObject(id);
-
-            return ResponseEntity.ok(userMapper.toDto(user));
+            return ResponseEntity.ok(userMapper.toDto(userService.getObject(id)));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity putObject(@PathVariable Long id, @RequestBody UserDto userDto) {
+    public ResponseEntity putObject(@PathVariable Long id, @RequestBody UserDto user) {
         try {
-            User user = userMapper.toEntity(userDto);
-            return ResponseEntity.ok(userService.editObject(user, id));
+            return ResponseEntity.ok(userMapper.toDto(userService.editObject(userMapper.toEntity(user), id)));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
