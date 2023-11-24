@@ -6,6 +6,7 @@ import com.example.testsBack.repositories.RoleRepository;
 import com.example.testsBack.repositories.StudentsGroupRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,8 +29,10 @@ public class StudentsGroupService {
         return studentsGroupRepository.findById(id).get();
     }
 
-    public Iterable<StudentsGroup> getAllObjects() {
-        return studentsGroupRepository.findAll();
+    public List<StudentsGroup> getAllObjects() {
+        List<StudentsGroup> objectsList = new ArrayList();
+        studentsGroupRepository.findAll().iterator().forEachRemaining(objectsList::add);
+        return objectsList;
     }
 
     public StudentsGroup editObject(StudentsGroup studentsGroup, Long id) throws BadRequest {

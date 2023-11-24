@@ -6,6 +6,7 @@ import com.example.testsBack.exceptions.BadRequest;
 import com.example.testsBack.repositories.AnswerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,8 +32,10 @@ public class AnswerService {
         return answerRepository.findById(id).get();
     }
 
-    public Iterable<Answer> getAllObjects() {
-        return answerRepository.findAll();
+    public List<Answer> getAllObjects() {
+        List<Answer> objectsList = new ArrayList();
+        answerRepository.findAll().iterator().forEachRemaining(objectsList::add);
+        return objectsList;
     }
 
     public Answer editObject(Long id, Answer answer) throws BadRequest {
