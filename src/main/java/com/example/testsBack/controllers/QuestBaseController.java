@@ -1,22 +1,28 @@
 package com.example.testsBack.controllers;
 
+import com.example.testsBack.dtos.QuestBaseDto;
 import com.example.testsBack.entities.QuestBase;
 import com.example.testsBack.exceptions.BadRequest;
+import com.example.testsBack.mappers.QuestBaseMapper;
 import com.example.testsBack.services.QuestBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/questBases")
 public class QuestBaseController {
     @Autowired
     private QuestBaseService questBaseService;
+    @Autowired
+    private QuestBaseMapper questBaseMapper;
 
     @PostMapping("/new")
-    public ResponseEntity postObject(@RequestBody QuestBase questBase) {
+    public ResponseEntity postObject(@RequestBody QuestBaseDto questBase) {
         try {
-            return ResponseEntity.ok(questBaseService.addObject(questBase));
+            return ResponseEntity.ok(questBaseMapper.toDto(questBaseService.addObject(questBaseMapper.toEntity(questBase))));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -25,18 +31,18 @@ public class QuestBaseController {
     @GetMapping("/{id}")
     public ResponseEntity getOneObject(@PathVariable Long id) {
         try {
-            return ResponseEntity.ok(questBaseService.getObject(id));
+            return ResponseEntity.ok(questBaseMapper.toDto(questBaseService.getObject(id)));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
     @GetMapping("/")
-    public ResponseEntity getAllObjects() { return ResponseEntity.ok(questBaseService.getAllObjects()); }
+    public ResponseEntity getAllObjects() { return ResponseEntity.ok(questBaseService.getAllObjects().stream().map(questBaseMapper::toDto).collect(Collectors.toList())); }
 
     @PutMapping("/{id}")
-    public ResponseEntity putObject(@PathVariable Long id, @RequestBody QuestBase questBase) {
+    public ResponseEntity putObject(@PathVariable Long id, @RequestBody QuestBaseDto questBase) {
         try {
-            return ResponseEntity.ok(questBaseService.editObject(id, questBase));
+            return ResponseEntity.ok(questBaseMapper.toDto(questBaseService.editObject(id, questBaseMapper.toEntity(questBase))));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

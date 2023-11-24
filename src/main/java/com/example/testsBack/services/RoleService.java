@@ -5,6 +5,7 @@ import com.example.testsBack.repositories.RoleRepository;
 import org.springframework.stereotype.Service;
 import com.example.testsBack.entities.Role;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,8 +23,10 @@ public class RoleService {
         return roleRepository.save(role);
     }
 
-    public Iterable<Role> getAllObjects(){
-        return roleRepository.findAll();
+    public List<Role> getAllObjects(){
+        List<Role> objectsList = new ArrayList();
+        roleRepository.findAll().iterator().forEachRemaining(objectsList::add);
+        return objectsList;
     }
 
     public Role getOneObject(Long id) throws BadRequest {
