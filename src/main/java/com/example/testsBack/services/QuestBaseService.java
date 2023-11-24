@@ -1,6 +1,7 @@
 package com.example.testsBack.services;
 
 import com.example.testsBack.entities.QuestBase;
+import com.example.testsBack.entities.User;
 import com.example.testsBack.exceptions.BadRequest;
 import com.example.testsBack.repositories.QuestBaseRepository;
 import org.springframework.stereotype.Service;

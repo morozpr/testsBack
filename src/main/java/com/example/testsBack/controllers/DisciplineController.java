@@ -21,9 +21,9 @@ public class DisciplineController {
     private DisciplineMapper disciplineMapper;
 
     @PostMapping("/new")
-    public ResponseEntity postObject(@RequestBody DisciplineDto discipline) {
+    public ResponseEntity postObject(@RequestBody Discipline discipline) {
         try {
-            return ResponseEntity.ok(disciplineMapper.toDto(disciplineService.addObject(disciplineMapper.toEntity(discipline))));
+            return ResponseEntity.ok(disciplineMapper.toDto(disciplineService.addObject(discipline)));
         } catch (BadRequest e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
