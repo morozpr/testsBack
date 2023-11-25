@@ -5,6 +5,7 @@ import com.example.testsBack.entities.User;
 import com.example.testsBack.exceptions.BadRequest;
 import com.example.testsBack.mappers.UserMapper;
 import com.example.testsBack.services.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
