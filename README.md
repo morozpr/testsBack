@@ -36,9 +36,7 @@ api.endpoint: /api
 
 response.data: [{fullName: test, roleID: {id: 2, name: 'ROLE_TEST'}, universityID: 1, studentsGroupID: 0, email: 'test@mail.com', telegramLogin: test, phoneNumber: 9999999999}]
 
-
 response.error: Bad request
-
 
 -- Contributing:
 
