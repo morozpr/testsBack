@@ -25,7 +25,7 @@ database.url: localhost
 database.username: postgres
 database.password: postgres
 api.endpoint: /api
-response.data: [{roleID: {ROLE_TEST: ROLE_TEST}, fullName: test, email: 'test@mail.com', universityID: 1, telegramLogin: test, phoneNumber: 9999999999, studentsGroupID: 0} {id: 2, name: 'Jane Doe'}].
+response.data: [{fullName: test, roleID: {id: 2, name: 'ROLE_TEST'}, universityID: 1, studentsGroupID: 0, email: 'test@mail.com', telegramLogin: test, phoneNumber: 9999999999}]
 response.error: Bad request
 
 -- Contributing:
