@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/universities")
+@RequestMapping("api/universities")
 public class UniversityController {
     @Autowired
     private UniversityService universityService;

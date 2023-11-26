@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/testQuests")
+@RequestMapping("api/testQuests")
 public class TestQuestController {
     @Autowired
     private TestQuestService testQuestService;

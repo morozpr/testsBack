@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/sGroup")
+@RequestMapping("api/sGroup")
 public class StudentsGroupController {
     @Autowired
     private StudentsGroupService studentsGroupService;

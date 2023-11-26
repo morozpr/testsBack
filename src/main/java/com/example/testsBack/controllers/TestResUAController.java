@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/testResultUserAnswer")
+@RequestMapping("api/testResultUserAnswer")
 public class TestResUAController {
     @Autowired
     private TestResultUserAnswerService testResultUserAnswerService;

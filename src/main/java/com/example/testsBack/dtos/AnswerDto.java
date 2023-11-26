@@ -10,6 +10,7 @@ import java.io.Serializable;
  */
 @Value
 public class AnswerDto implements Serializable {
+    Long id;
     @NotNull
     String answerValue;
     @NotNull

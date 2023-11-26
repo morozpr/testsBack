@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("api/test")
 public class TestController {
 
     private final TestService testService;
