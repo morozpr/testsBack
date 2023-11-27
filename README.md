@@ -54,7 +54,7 @@ The configuration of the project is done through the application.properties file
 > docker pull morozpr/testsdb14.9:testsdb14.9
 
 #### **Launch**
-> docker pull morozpr/testsdb14.9:testsdb14.9
+> docker run -p 5432:5432 morozpr/testsdb14.9:testsdb14.9
 
 ## **Contributing:**
 
