@@ -36,7 +36,7 @@ The configuration of the project is done through the application.properties file
 
 * response.error: Bad request
 
-## **installation**
+## **Installation**
 
 ### **Docker (in development)**
 
@@ -48,7 +48,7 @@ docker pull morozpr/testsback:latest
 
 docker run -d morozpr/testsback:latest
 
-### **installation DB**
+### **Installation DB**
 docker pull morozpr/testsdb14.9:testsdb14.9
 
 ### **Launch**
