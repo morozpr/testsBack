@@ -40,7 +40,7 @@ The configuration of the project is done through the application.properties file
 
 ### **Docker (in development)**
 
-Download image from Docker Hub
+### **Download image from Docker Hub**
 
 docker pull morozpr/testsback:latest
 
