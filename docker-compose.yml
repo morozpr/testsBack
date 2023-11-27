@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  testsdb:
+    container_name: tests-db
+    image: testsdb
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: testsDB
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: testsback
