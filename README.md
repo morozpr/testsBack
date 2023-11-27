@@ -22,9 +22,9 @@ Enjoy!
 
 The configuration of the project is done through the application.properties file. You can modify the following properties to customize the behavior of the server:
 
-server.port: 5432
+* server.port: 5432
 
-database.url: localhost
+* database.url: localhost
 
 database.username: postgres
 
