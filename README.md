@@ -44,7 +44,7 @@ The configuration of the project is done through the application.properties file
 
 > docker pull morozpr/testsback:latest
 
-#### **Launch**
+#### **Launch back**
 
 > docker run -d morozpr/testsback:latest
 
