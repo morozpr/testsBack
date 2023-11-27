@@ -42,8 +42,8 @@ The configuration of the project is done through the application.properties file
 
 #### **Download image from Docker Hub**
 
-``bash
-docker pull morozpr/testsback:latest ``
+```bash
+docker pull morozpr/testsback:latest ```
 
 #### **Launch**
 
