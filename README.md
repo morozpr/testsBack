@@ -4,21 +4,21 @@
 
 This project provides a testing backend implementation using Java Spring framework. It allows you to easily test your frontend applications by simulating API endpoints and database interactions.
 
-## Features
+## **Features**
 
 Implemented using Java Spring Boot framework
 Supports RESTful APIs and SQL databases
 Configurable endpoint URLs and query parameters
 Customizable response data and error messages
 
-## Getting Started
+## **Getting Started**
 
 Clone the repository and import it into your IDE.
 Use your preferred testing framework to send requests to the server and verify responses.
 Customize the configuration by modifying the application.properties file.
 Enjoy!
 
-## Configuration
+## **Configuration**
 
 The configuration of the project is done through the application.properties file. You can modify the following properties to customize the behavior of the server:
 
@@ -36,7 +36,7 @@ response.data: [{fullName: test, roleID: {id: 2, name: 'ROLE_TEST'}, universityI
 
 response.error: Bad request
 
-## installation
+## **installation**
 
 Docker (in development)
 Download image from Docker Hub
@@ -44,9 +44,9 @@ docker pull morozpr/testsback:latest
 Start container
 docker run -d morozpr/testsback:latest
 
-### installation DB
+### **installation DB**
 docker pull morozpr/testsdb14.9:testsdb14.9
 
-## Contributing:
+## **Contributing:**
 
 Pull requests are welcome! Please fork the project, make changes, and submit a pull request with a clear description of your changes.
