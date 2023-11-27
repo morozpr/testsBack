@@ -38,10 +38,14 @@ The configuration of the project is done through the application.properties file
 
 ## **installation**
 
-Docker (in development)
+### **Docker (in development)**
+
 Download image from Docker Hub
+
 docker pull morozpr/testsback:latest
-Start container
+
+### **Launch**
+
 docker run -d morozpr/testsback:latest
 
 ### **installation DB**
