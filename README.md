@@ -42,11 +42,12 @@ The configuration of the project is done through the application.properties file
 
 #### **Download image from Docker Hub**
 
-`` docker pull morozpr/testsback:latest ``
+``bash
+docker pull morozpr/testsback:latest ``
 
 #### **Launch**
 
-> docker run -d morozpr/testsback:latest
+docker run -d morozpr/testsback:latest
 
 #### **Installation DB**
 docker pull morozpr/testsdb14.9:testsdb14.9
