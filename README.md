@@ -14,8 +14,6 @@ Customizable response data and error messages
 -- Getting Started
 
 Clone the repository and import it into your IDE.
-Run mvn clean package to build the project.
-Run java -jar target/tests-back-java-spring.jar to start the server.
 Use your preferred testing framework to send requests to the server and verify responses.
 Customize the configuration by modifying the application.properties file.
 Enjoy!
