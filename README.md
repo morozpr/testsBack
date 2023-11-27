@@ -47,6 +47,9 @@ docker run -d morozpr/testsback:latest
 ### **installation DB**
 docker pull morozpr/testsdb14.9:testsdb14.9
 
+### **Launch**
+docker pull morozpr/testsdb14.9:testsdb14.9
+
 ## **Contributing:**
 
 Pull requests are welcome! Please fork the project, make changes, and submit a pull request with a clear description of your changes.
