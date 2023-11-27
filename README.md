@@ -47,13 +47,13 @@ docker pull morozpr/testsback:latest ``
 
 #### **Launch**
 
-docker run -d morozpr/testsback:latest
+> docker run -d morozpr/testsback:latest
 
 #### **Installation DB**
-docker pull morozpr/testsdb14.9:testsdb14.9
+> docker pull morozpr/testsdb14.9:testsdb14.9
 
 #### **Launch**
-docker pull morozpr/testsdb14.9:testsdb14.9
+> docker pull morozpr/testsdb14.9:testsdb14.9
 
 ## **Contributing:**
 
