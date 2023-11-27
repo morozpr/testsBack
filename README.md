@@ -44,11 +44,13 @@ The configuration of the project is done through the application.properties file
 
 > docker pull morozpr/testsback:latest
 
-#### **Launch back**
+#### **Launch Back**
 
 > docker run -d morozpr/testsback:latest
 
-#### **Installation DB**
+### **DataBase**
+
+#### **Installation**
 > docker pull morozpr/testsdb14.9:testsdb14.9
 
 #### **Launch**
