@@ -26,15 +26,15 @@ The configuration of the project is done through the application.properties file
 
 * database.url: localhost
 
-database.username: postgres
+* database.username: postgres
 
-database.password: postgres
+* database.password: postgres
 
-api.endpoint: /api
+* api.endpoint: /api
 
-response.data: [{fullName: test, roleID: {id: 2, name: 'ROLE_TEST'}, universityID: 1, studentsGroupID: 0, email: 'test@mail.com', telegramLogin: test, phoneNumber: 9999999999}]
+* response.data: [{fullName: test, roleID: {id: 2, name: 'ROLE_TEST'}, universityID: 1, studentsGroupID: 0, email: 'test@mail.com', telegramLogin: test, phoneNumber: 9999999999}]
 
-response.error: Bad request
+* response.error: Bad request
 
 ## **installation**
 
