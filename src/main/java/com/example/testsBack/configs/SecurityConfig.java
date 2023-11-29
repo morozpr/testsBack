@@ -59,13 +59,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(requests -> requests
                         .anyRequest().permitAll()
                 );
-//                .formLogin(form -> form
-//                        .loginPage("/login")
-//                        .permitAll()
-//                )
-//                .logout(LogoutConfigurer::permitAll);
-//                .csrf(csrf -> csrf
-//                .ignoringRequestMatchers("/**"));
         return http.build();
     }
     @Bean

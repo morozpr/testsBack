@@ -1,5 +1,5 @@
-FROM openjdk:17-oracle
+FROM openjdk:22-slim
 VOLUME /tmp
-ARG JAR_FILE
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+EXPOSE 8080
+COPY app_new.jar app_new.jar
+ENTRYPOINT ["java","-jar","/app_new.jar"]
