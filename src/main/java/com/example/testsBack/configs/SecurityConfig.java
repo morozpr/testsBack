@@ -23,6 +23,7 @@ import org.springframework.security.config.annotation.web.configurers.LogoutConf
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.*;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -36,6 +37,7 @@ import java.util.function.Supplier;
 @EnableWebSecurity
 @RequiredArgsConstructor
 @EnableMethodSecurity (securedEnabled = true)
+@Component
 public class SecurityConfig {
     private final UserService userService;
 
@@ -52,20 +54,18 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf
-                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                        .csrfTokenRequestHandler(new SpaCsrfTokenRequestHandler()))
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.disable())
                 .authorizeHttpRequests(requests -> requests
-                        .anyRequest().authenticated()
-                )
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .permitAll()
-                )
-                .logout(LogoutConfigurer::permitAll)
-                .csrf(csrf -> csrf
-                .ignoringRequestMatchers("/**"));
+                        .anyRequest().permitAll()
+                );
+//                .formLogin(form -> form
+//                        .loginPage("/login")
+//                        .permitAll()
+//                )
+//                .logout(LogoutConfigurer::permitAll);
+//                .csrf(csrf -> csrf
+//                .ignoringRequestMatchers("/**"));
         return http.build();
     }
     @Bean
