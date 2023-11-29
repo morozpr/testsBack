@@ -40,21 +40,14 @@ The configuration of the project is done through the application.properties file
 
 ### **Docker (in development):**
 
-#### **Download image from Docker Hub**
+#### **Build project**
 
-> docker pull morozpr/testsback:latest
+> gradlew bootJar
 
-#### **Launch Back**
+##### **Copy builded Jar file to root directory and rename to "app_new.jar"**
 
-> docker run -d morozpr/testsback:latest
-
-### **DataBase**
-
-#### **Installation**
-> docker pull morozpr/testsdb14.9:testsdb14.9
-
-#### **Launch**
-> docker run -p 5432:5432 morozpr/testsdb14.9:testsdb14.9
+#### **Launch project**
+> docker-compose up
 
 ## **Contributing:**
 
