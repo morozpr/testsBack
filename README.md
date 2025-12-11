@@ -49,6 +49,3 @@ The configuration of the project is done through the application.properties file
 #### **Launch project**
 > docker-compose up
 
-## **Contributing:**
-
-Pull requests are welcome! Please fork the project, make changes, and submit a pull request with a clear description of your changes.
